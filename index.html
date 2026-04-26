@@ -1,161 +1,559 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inspector Tirak LE501 - Andamios Panamá</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
-            background: #0f1419;
-            color: #e0e6ed;
-            overflow-x: hidden;
-        }
-        
-        .container {
-            max-width: 810px;
-            margin: 0 auto;
-            padding: 16px;
-            min-height: 100vh;
-        }
-        
-        header {
-            background: #1a2332;
-            border-bottom: 1px solid #2a3f5f;
-            padding: 16px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-        }
-        
-        h1 {
-            font-size: 18px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: #4db8ff;
-            margin-bottom: 4px;
-        }
-        
-        .subtitle {
-            font-size: 11px;
-            color: #6a8aaa;
-            letter-spacing: 1px;
-        }
-        
-        .screen {
-            display: none;
-        }
-        
-        .screen.active {
-            display: block;
-        }
-        
-        .nav-buttons {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        
-        button {
-            padding: 10px 16px;
-            border: 1px solid #2a5a8a;
-            background: #0d2847;
-            color: #4db8ff;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            transition: all 0.2s;
-            min-height: 44px;
-            touch-action: manipulation;
-        }
-        
-        button:active {
-            background: #1a3f5f;
-        }
-        
-        button.active {
-            background: #1a5a8a;
-            border-color: #4db8ff;
-        }
-        
-        .card {
-            background: #1a2332;
-            border: 1px solid #2a3f5f;
-            border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 16px;
-        }
-        
-        label {
-            display: block;
-            font-size: 12px;
-            color: #6a8aaa;
-            margin-bottom: 6px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-        
-        input[type="text"],
-        input[type="number"],
-        select,
-        textarea {
-            width: 100%;
-            padding: 10px;
-            background: #0d1f33;
-            border: 1px solid #2a3f5f;
-            color: #e0e6ed;
-            border-radius: 4px;
-            font-family: inherit;
-            font-size: 14px;
-            margin-bottom: 12px;
-            min-height: 44px;
-        }
-        
-        textarea {
-            min-height: 80px;
-            resize: vertical;
-        }
-        
-        .check-group {
-            background: #0d1f33;
-            border-left: 3px solid #2a5a8a;
-            padding: 12px;
-            margin-bottom: 12px;
-            border-radius: 4px;
-        }
-        
-        .check-label {
-            font-size: 13px;
-            margin-bottom: 8px;
-            display: block;
-        }
-        
-        .button-group {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-        
-        .button-group button {
-            flex: 1;
-        }
-        
-        .status-badge {
-            display: inline-block;
-            padding: 4px 8px;
-            border-radius: 3px;
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-        
-        .status-ok { background: #0​​​​​​​​​​​​​​​​
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Inspección Tirak LE 501 — Canal de Panamá</title>
+<style>
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; background: #07080d; color: #cce0f0; min-height: 100vh; touch-action: manipulation; }
+  .app { max-width: 1000px; margin: 0 auto; padding: 14px; padding-bottom: 80px; }
+  .hdr { background: #0a0e18; border: 1px solid #1a3550; border-radius: 8px; padding: 14px 18px; margin-bottom: 14px; position: sticky; top: 8px; z-index: 10; }
+  .logo { font-size: 14px; font-weight: 700; letter-spacing: 2px; color: #4db8ff; text-transform: uppercase; }
+  .sub { font-size: 11px; color: #3a607a; letter-spacing: 1.5px; margin-top: 4px; }
+  .card { background: #0c1722; border: 1px solid #1a3550; border-radius: 8px; padding: 16px; margin-bottom: 12px; }
+  .sec-title { font-size: 12px; letter-spacing: 2.5px; color: #4db8ff; text-transform: uppercase; margin-bottom: 12px; font-weight: 700; }
+  .label { font-size: 12px; color: #5a80a0; margin-bottom: 6px; display: block; }
+  input, select, textarea { background: #05080f; border: 1px solid #1a3550; color: #cce0f0; padding: 12px 14px; border-radius: 6px; font-family: inherit; font-size: 15px; width: 100%; outline: none; min-height: 44px; }
+  textarea { resize: vertical; min-height: 80px; }
+  .btn { background: #0d3050; color: #4db8ff; border: 1px solid #1e6090; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-family: inherit; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; min-height: 44px; }
+  .btn-primary { background: #1e6090; color: #fff; border-color: #4db8ff; }
+  .btn-success { background: #0a3a24; color: #3eff9c; border-color: #1e8a5a; }
+  .btn-danger { background: #3a0a0a; color: #ff5555; border-color: #8a2a2a; }
+  .btn-warning { background: #3a2800; color: #ffb800; border-color: #8a5a00; }
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+  .check-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid #0e1c2c; gap: 10px; flex-wrap: wrap; }
+  .check-label { font-size: 14px; color: #cce0f0; flex: 1 1 240px; line-height: 1.4; }
+  .check-label small { display: block; color: #3a607a; font-size: 11px; margin-top: 3px; }
+  .pf-btn { padding: 10px 18px; font-size: 12px; cursor: pointer; font-weight: 700; background: #05080f; color: #3a607a; border: 1.5px solid #1a3550; border-radius: 6px; min-height: 44px; min-width: 70px; }
+  .pf-btn.ok-active { background: #0a3a24; color: #3eff9c; border-color: #1e8a5a; }
+  .pf-btn.fail-active { background: #3a0a0a; color: #ff5555; border-color: #8a2a2a; }
+  .num-input { width: 100px; text-align: right; font-weight: 600; color: #4db8ff; }
+  .badge { padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; letter-spacing: 1px; }
+  .badge-pass { background: #0a3a24; color: #3eff9c; }
+  .badge-fail { background: #3a0a0a; color: #ff5555; }
+  .badge-warn { background: #3a2800; color: #ffb800; }
+  .badge-pending { background: #0d1520; color: #5a80a0; }
+  .nav { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+  .nav-btn { padding: 8px 14px; background: transparent; color: #5a80a0; border: 1px solid #1a3550; border-radius: 6px; font-size: 11px; letter-spacing: 1.5px; cursor: pointer; text-transform: uppercase; font-weight: 600; }
+  .nav-btn.active { background: #0d3050; color: #4db8ff; border-color: #1e6090; }
+  .step-indicator { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+  .step { padding: 8px 12px; background: #0c1722; border: 1px solid #1a3550; border-radius: 6px; font-size: 11px; color: #5a80a0; flex: 1 1 120px; text-align: center; }
+  .step.active { background: #0d3050; border-color: #1e6090; color: #4db8ff; font-weight: 700; }
+  .step.completed { background: #0a3a24; border-color: #1e8a5a; color: #3eff9c; }
+  .signature-pad { background: #fff; border: 2px solid #1a3550; border-radius: 6px; touch-action: none; width: 100%; height: 150px; cursor: crosshair; }
+  .summary-status { padding: 24px; text-align: center; border-radius: 8px; margin-bottom: 14px; }
+  .summary-status.green { background: #0a3a24; border: 2px solid #1e8a5a; }
+  .summary-status.orange { background: #3a2800; border: 2px solid #8a5a00; }
+  .summary-status.red { background: #3a0a0a; border: 2px solid #8a2a2a; }
+  .summary-title { font-size: 24px; font-weight: 700; letter-spacing: 2px; }
+  .summary-desc { font-size: 13px; margin-top: 8px; opacity: 0.9; }
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+  h2 { color: #4db8ff; font-size: 18px; margin: 14px 0 10px; }
+  .scaffold-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
+  .scaffold-card { background: #080f1a; border: 1px solid #1a3550; border-radius: 8px; padding: 14px; cursor: pointer; }
+  .scaffold-card:hover { border-color: #4db8ff; }
+  .scaffold-id { font-size: 16px; color: #4db8ff; font-weight: 700; margin-bottom: 6px; }
+  .scaffold-date { font-size: 11px; color: #3a607a; margin-top: 6px; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="hdr">
+    <div class="logo">Inspección Tirak LE 501</div>
+    <div class="sub">Canal de Panamá · Sistema de Plataforma BSO 500</div>
+    <div class="nav">
+      <button class="nav-btn" onclick="showView('home')">Inicio</button>
+      <button class="nav-btn" onclick="showView('history')">Historial</button>
+      <button class="nav-btn" onclick="showView('settings')">Ajustes</button>
+    </div>
+  </div>
+  <div id="content"></div>
+</div>
 
+<script>
+// ═══════════ DATA STRUCTURE ═══════════
+const DEFAULT_CONFIG = {
+  techs: ["Alex", "Carlos", "María", "José", "Lizbeth"],
+  supervisors: ["Roberto", "Supervisor 2"],
+  managers: ["Alex"],
+  checks: {
+    rigging: [
+      { id: "rig_tieback", label: "¿Tieback correctamente sujeto?", critical: true },
+      { id: "rig_connections", label: "¿Todas las conexiones apretadas?", critical: true },
+      { id: "rig_normal", label: "¿Aparejo en condición normal?", critical: true },
+      { id: "rig_cracks", label: "¿Sin grietas o fisuras visibles?", critical: true },
+      { id: "rig_bending", label: "¿Sin deformación o doblez?", critical: true },
+      { id: "rig_shackles", label: "¿Grilletes seguros y sin daño?", critical: true },
+      { id: "rig_rope_broken", label: "Cable: ¿sin alambres rotos?", critical: true },
+      { id: "rig_rope_kinks", label: "Cable: ¿sin torceduras?", critical: true },
+      { id: "rig_rope_corrosion", label: "Cable: ¿sin corrosión?", critical: true },
+      { id: "rig_rope_wear", label: "Cable: ¿desgaste dentro de límites?", critical: true },
+      { id: "rig_rope_lub", label: "Cable: ¿lubricación adecuada?", critical: true },
+      { id: "rig_rope_term", label: "Cable: ¿terminaciones seguras?", critical: true },
+      { id: "rig_platform_term", label: "¿Terminales de plataforma en buen estado?", critical: true },
+      { id: "rig_platform_shackles", label: "¿Grilletes de plataforma en buen estado?", critical: true },
+    ],
+    ccb: [
+      { id: "ccb_estop", label: "¿Paro de emergencia corta ambos polipastos?", critical: true },
+      { id: "ccb_up", label: "¿Botón SUBIR funcional?", critical: true },
+      { id: "ccb_down", label: "¿Botón BAJAR funcional?", critical: true },
+      { id: "ccb_selector", label: "¿Selector Polipasto A/B funcional?", critical: true },
+      { id: "ccb_key", label: "¿Selector de llave (CCC/Botonera) funcional?", critical: true },
+      { id: "pend_estop", label: "Botonera: ¿Paro de emergencia corta energía?", critical: true },
+      { id: "pend_up", label: "Botonera: ¿Botón SUBIR funcional?", critical: true },
+      { id: "pend_down", label: "Botonera: ¿Botón BAJAR funcional?", critical: true },
+      { id: "pend_selector", label: "Botonera: ¿Selector A/B funcional?", critical: true },
+      { id: "ccb_visual", label: "Estado visual general (interior del tablero)", critical: false, type: "status" },
+    ],
+    hoist: [
+      { id: "h_amperage", label: "Amperaje durante operación", critical: false, type: "number", unit: "A", min: 4, max: 12 },
+      { id: "h_temp_start", label: "Temperatura del estator — Inicio de turno", critical: false, type: "number", unit: "°F", min: 40, max: 60 },
+      { id: "h_temp_end", label: "Temperatura del estator — Fin de turno", critical: false, type: "number", unit: "°F", min: 40, max: 60 },
+      { id: "h_rope_smooth", label: "¿Cable corre suavemente por el polipasto?", critical: false },
+      { id: "h_visual", label: "¿Sin signos visuales de desgaste o daño?", critical: false },
+      { id: "h_obstructions", label: "¿Sin obstrucciones en entrada/salida del cable?", critical: false },
+      { id: "h_bso_wheels", label: "BSO: ¿Ruedas internas giran libremente?", critical: false },
+      { id: "h_bso_emergency", label: "BSO: ¿Botón de emergencia manual funcional?", critical: false },
+      { id: "h_bso_load", label: "BSO: ¿Sostiene la carga al activarse?", critical: false },
+      { id: "h_bso_release", label: "BSO: ¿Palanca de liberación manual funcional?", critical: false },
+    ]
+  }
+};
+
+let config = JSON.parse(localStorage.getItem('tirak_config') || 'null') || JSON.parse(JSON.stringify(DEFAULT_CONFIG));
+let inspections = JSON.parse(localStorage.getItem('tirak_inspections') || '[]');
+let currentInspection = null;
+let currentView = 'home';
+let currentStep = 0;
+
+const STEPS = ['Identificación', 'Aparejo', 'CCC + Botonera', 'Polipasto A', 'Polipasto B', 'Resumen'];
+
+function saveConfig() { localStorage.setItem('tirak_config', JSON.stringify(config)); }
+function saveInspections() { localStorage.setItem('tirak_inspections', JSON.stringify(inspections)); }
+
+function showView(v) { currentView = v; render(); }
+
+function startNewInspection() {
+  currentInspection = {
+    id: 'insp_' + Date.now(),
+    scaffoldId: '',
+    date: new Date().toISOString(),
+    technician: '',
+    supervisor: '',
+    manager: '',
+    rigging: {},
+    ccb: {},
+    hoistA: {},
+    hoistB: {},
+    sigTech: '',
+    sigSup: '',
+    sigMgr: '',
+    status: 'pending',
+    notes: ''
+  };
+  currentStep = 0;
+  currentView = 'inspect';
+  render();
+}
+
+function evaluateInspection(insp) {
+  const allChecks = [
+    ...config.checks.rigging.map(c => ({...c, val: insp.rigging[c.id]})),
+    ...config.checks.ccb.map(c => ({...c, val: insp.ccb[c.id]})),
+    ...config.checks.hoist.map(c => ({...c, val: insp.hoistA[c.id], section: 'A'})),
+    ...config.checks.hoist.map(c => ({...c, val: insp.hoistB[c.id], section: 'B'})),
+  ];
+  let hasCriticalFail = false, hasNonCriticalFlag = false, hasPending = false;
+  allChecks.forEach(c => {
+    if (c.type === 'number') {
+      if (c.val === '' || c.val == null) { hasPending = true; return; }
+      const n = parseFloat(c.val);
+      if (n > c.max || n < c.min) {
+        if (c.critical) hasCriticalFail = true; else hasNonCriticalFlag = true;
+      }
+    } else if (c.type === 'status') {
+      if (!c.val) { hasPending = true; return; }
+      if (c.val === 'bad') hasCriticalFail = true;
+      else if (c.val === 'moderate') hasNonCriticalFlag = true;
+    } else {
+      if (!c.val) { hasPending = true; return; }
+      if (c.val === 'fail') {
+        if (c.critical) hasCriticalFail = true; else hasNonCriticalFlag = true;
+      }
+    }
+  });
+  if (hasPending) return 'pending';
+  if (hasCriticalFail) return 'red';
+  if (hasNonCriticalFlag) return 'orange';
+  return 'green';
+}
+
+function render() {
+  const c = document.getElementById('content');
+  if (currentView === 'home') c.innerHTML = renderHome();
+  else if (currentView === 'inspect') c.innerHTML = renderInspect();
+  else if (currentView === 'history') c.innerHTML = renderHistory();
+  else if (currentView === 'settings') c.innerHTML = renderSettings();
+  attachListeners();
+}
+
+function renderHome() {
+  const today = new Date().toDateString();
+  const todayInsp = inspections.filter(i => new Date(i.date).toDateString() === today);
+  return `
+    <div class="card">
+      <div class="sec-title">Resumen del Día</div>
+      <div class="grid-2">
+        <div><div style="font-size:32px;color:#4db8ff;font-weight:700">${todayInsp.length}</div><div class="label">Inspecciones Hoy</div></div>
+        <div><div style="font-size:32px;color:#3eff9c;font-weight:700">${todayInsp.filter(i=>i.status==='green').length}</div><div class="label">Aprobadas (Verde)</div></div>
+        <div><div style="font-size:32px;color:#ffb800;font-weight:700">${todayInsp.filter(i=>i.status==='orange').length}</div><div class="label">Pendiente Revisión (Naranja)</div></div>
+        <div><div style="font-size:32px;color:#ff5555;font-weight:700">${todayInsp.filter(i=>i.status==='red').length}</div><div class="label">Falla Crítica (Rojo)</div></div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="startNewInspection()">+ Nueva Inspección de Andamio</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sec-title">Inspecciones de Hoy</div>
+      ${todayInsp.length === 0 ? '<div style="color:#3a607a;font-size:13px">No hay inspecciones hoy.</div>' : 
+        todayInsp.map(i => `
+          <div style="padding:10px 0;border-bottom:1px solid #0e1c2c;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+            <div>
+              <div style="color:#4db8ff;font-weight:700">Andamio ${i.scaffoldId}</div>
+              <div style="font-size:11px;color:#5a80a0">${i.technician} · ${new Date(i.date).toLocaleTimeString('es-PA',{hour:'2-digit',minute:'2-digit'})}</div>
+            </div>
+            <span class="badge badge-${i.status==='green'?'pass':i.status==='orange'?'warn':i.status==='red'?'fail':'pending'}">${i.status==='green'?'APROBADO':i.status==='orange'?'REVISIÓN':i.status==='red'?'FALLA':'PENDIENTE'}</span>
+          </div>
+        `).join('')}
+    </div>
+  `;
+}
+
+function renderInspect() {
+  if (!currentInspection) { startNewInspection(); return ''; }
+  const stepHtml = STEPS.map((s,i) => `<div class="step ${i===currentStep?'active':i<currentStep?'completed':''}">${i+1}. ${s}</div>`).join('');
+  let body = '';
+  if (currentStep === 0) body = renderStepIdentification();
+  else if (currentStep === 1) body = renderStepChecks('rigging', 'Inspección de Aparejo', config.checks.rigging);
+  else if (currentStep === 2) body = renderStepChecks('ccb', 'Tablero de Control Central + Botonera', config.checks.ccb);
+  else if (currentStep === 3) body = renderStepChecks('hoistA', 'Polipasto A — Tirak LE 501', config.checks.hoist);
+  else if (currentStep === 4) body = renderStepChecks('hoistB', 'Polipasto B — Tirak LE 501', config.checks.hoist);
+  else if (currentStep === 5) body = renderStepSummary();
+  return `<div class="step-indicator">${stepHtml}</div>${body}`;
+}
+
+function renderStepIdentification() {
+  return `
+    <div class="card">
+      <div class="sec-title">Identificación del Andamio</div>
+      <div class="grid-2">
+        <div>
+          <label class="label">Número de Andamio (Canal de Panamá)</label>
+          <input id="scaffoldId" placeholder="Ej: 12345" value="${currentInspection.scaffoldId}" />
+        </div>
+        <div>
+          <label class="label">Técnico</label>
+          <select id="technician">
+            <option value="">— Seleccionar —</option>
+            ${config.techs.map(t => `<option ${currentInspection.technician===t?'selected':''}>${t}</option>`).join('')}
+          </select>
+        </div>
+        <div>
+          <label class="label">Fecha y Hora</label>
+          <input value="${new Date(currentInspection.date).toLocaleString('es-PA')}" disabled />
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn" onclick="cancelInspection()">Cancelar</button>
+        <button class="btn btn-primary" onclick="nextStep()">Siguiente: Aparejo →</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderStepChecks(section, title, checks) {
+  const data = currentInspection[section];
+  return `
+    <div class="card">
+      <div class="sec-title">${title}</div>
+      ${checks.map(check => {
+        const val = data[check.id] || '';
+        if (check.type === 'number') {
+          const n = parseFloat(val);
+          const status = !val ? 'pending' : (n>check.max||n<check.min ? 'warn' : 'pass');
+          return `
+            <div class="check-row">
+              <div class="check-label">${check.label}<small>nominal ${check.min}–${check.max}${check.unit}${!check.critical?' · No crítico':''}</small></div>
+              <div style="display:flex;align-items:center;gap:10px">
+                <span class="badge badge-${status}">${status==='pass'?'OK':status==='warn'?'ALERTA':'—'}</span>
+                <input type="number" class="num-input" value="${val}" onchange="setVal('${section}','${check.id}',this.value)" />
+                <span style="color:#5a80a0;font-size:12px">${check.unit}</span>
+              </div>
+            </div>`;
+        } else if (check.type === 'status') {
+          return `
+            <div class="check-row">
+              <div class="check-label">${check.label}</div>
+              <div style="display:flex;gap:6px">
+                <button class="pf-btn ${val==='good'?'ok-active':''}" onclick="setVal('${section}','${check.id}','good')">BUENO</button>
+                <button class="pf-btn ${val==='moderate'?'fail-active':''}" style="${val==='moderate'?'background:#3a2800;color:#ffb800;border-color:#8a5a00':''}" onclick="setVal('${section}','${check.id}','moderate')">MODERADO</button>
+                <button class="pf-btn ${val==='bad'?'fail-active':''}" onclick="setVal('${section}','${check.id}','bad')">MALO</button>
+              </div>
+            </div>`;
+        } else {
+          return `
+            <div class="check-row">
+              <div class="check-label">${check.label}${!check.critical?'<small>No crítico</small>':''}</div>
+              <div style="display:flex;gap:6px">
+                <button class="pf-btn ${val==='pass'?'ok-active':''}" onclick="setVal('${section}','${check.id}','pass')">SÍ</button>
+                <button class="pf-btn ${val==='fail'?'fail-active':''}" onclick="setVal('${section}','${check.id}','fail')">NO</button>
+              </div>
+            </div>`;
+        }
+      }).join('')}
+      <div class="btn-row">
+        <button class="btn" onclick="prevStep()">← Anterior</button>
+        <button class="btn btn-primary" onclick="nextStep()">Siguiente →</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderStepSummary() {
+  const status = evaluateInspection(currentInspection);
+  currentInspection.status = status;
+  const statusInfo = {
+    green: { title: '✓ APROBADO', desc: 'Todas las verificaciones aprobadas. Listo para firma del técnico.', class: 'green' },
+    orange: { title: '⚠ REVISIÓN REQUERIDA', desc: 'Hay alertas no críticas. Requiere firma del técnico y revisión del supervisor.', class: 'orange' },
+    red: { title: '✗ FALLA CRÍTICA', desc: 'Falla crítica detectada. Andamio fuera de servicio. Requiere revisión del supervisor y posible escalación al manager.', class: 'red' },
+    pending: { title: '⏳ INCOMPLETO', desc: 'Faltan verificaciones por completar.', class: 'orange' }
+  };
+  const s = statusInfo[status];
+  return `
+    <div class="summary-status ${s.class}">
+      <div class="summary-title">${s.title}</div>
+      <div class="summary-desc">${s.desc}</div>
+      <div style="margin-top:12px;font-size:14px">Andamio: <strong>${currentInspection.scaffoldId}</strong></div>
+    </div>
+    <div class="card">
+      <div class="sec-title">Firmas</div>
+      <div style="margin-bottom:14px">
+        <label class="label">Firma del Técnico (${currentInspection.technician})</label>
+        <canvas id="sigTech" class="signature-pad"></canvas>
+        <button class="btn" style="margin-top:8px" onclick="clearSig('sigTech')">Limpiar</button>
+      </div>
+      ${(status==='orange'||status==='red') ? `
+      <div style="margin-bottom:14px">
+        <label class="label">Supervisor</label>
+        <select id="supervisor" onchange="currentInspection.supervisor=this.value">
+          <option value="">— Seleccionar —</option>
+          ${config.supervisors.map(s => `<option ${currentInspection.supervisor===s?'selected':''}>${s}</option>`).join('')}
+        </select>
+        <label class="label" style="margin-top:10px">Firma del Supervisor</label>
+        <canvas id="sigSup" class="signature-pad"></canvas>
+        <button class="btn" style="margin-top:8px" onclick="clearSig('sigSup')">Limpiar</button>
+      </div>` : ''}
+      ${status==='red' ? `
+      <div style="margin-bottom:14px">
+        <label class="label">Manager (si supervisor no resuelve)</label>
+        <select id="manager" onchange="currentInspection.manager=this.value">
+          <option value="">— Seleccionar —</option>
+          ${config.managers.map(s => `<option ${currentInspection.manager===s?'selected':''}>${s}</option>`).join('')}
+        </select>
+        <label class="label" style="margin-top:10px">Firma del Manager</label>
+        <canvas id="sigMgr" class="signature-pad"></canvas>
+        <button class="btn" style="margin-top:8px" onclick="clearSig('sigMgr')">Limpiar</button>
+      </div>` : ''}
+    </div>
+    <div class="card">
+      <div class="sec-title">Notas Adicionales</div>
+      <textarea id="notes" placeholder="Acciones correctivas, observaciones...">${currentInspection.notes||''}</textarea>
+    </div>
+    <div class="btn-row">
+      <button class="btn" onclick="prevStep()">← Anterior</button>
+      <button class="btn btn-warning" onclick="exportPDF()">📄 PDF para Canal de Panamá</button>
+      <button class="btn btn-warning" onclick="exportCSV()">📊 Exportar CSV</button>
+      <button class="btn btn-success" onclick="saveInspectionFinal()">✓ Guardar Inspección</button>
+    </div>
+  `;
+}
+
+function renderHistory() {
+  return `
+    <div class="card">
+      <div class="sec-title">Historial de Inspecciones</div>
+      ${inspections.length === 0 ? '<div style="color:#3a607a">No hay inspecciones registradas.</div>' :
+        inspections.map(i => `
+          <div style="padding:12px 0;border-bottom:1px solid #0e1c2c">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+              <div>
+                <div style="color:#4db8ff;font-weight:700;font-size:15px">Andamio ${i.scaffoldId}</div>
+                <div style="font-size:11px;color:#5a80a0">${i.technician} · ${new Date(i.date).toLocaleString('es-PA')}</div>
+              </div>
+              <span class="badge badge-${i.status==='green'?'pass':i.status==='orange'?'warn':i.status==='red'?'fail':'pending'}">${i.status==='green'?'APROBADO':i.status==='orange'?'REVISIÓN':i.status==='red'?'FALLA':'PENDIENTE'}</span>
+            </div>
+          </div>
+        `).join('')}
+      ${inspections.length > 0 ? '<div class="btn-row"><button class="btn btn-warning" onclick="exportAllCSV()">📊 Exportar Todo a CSV</button></div>' : ''}
+    </div>
+  `;
+}
+
+function renderSettings() {
+  return `
+    <div class="card">
+      <div class="sec-title">Técnicos</div>
+      ${config.techs.map((t,i) => `<div style="padding:8px 0;display:flex;justify-content:space-between;align-items:center"><span>${t}</span><button class="btn btn-danger" onclick="removeTech(${i})">Eliminar</button></div>`).join('')}
+      <div style="display:flex;gap:8px;margin-top:10px"><input id="newTech" placeholder="Nombre nuevo técnico" /><button class="btn btn-success" onclick="addTech()">+</button></div>
+    </div>
+    <div class="card">
+      <div class="sec-title">Supervisores</div>
+      ${config.supervisors.map((t,i) => `<div style="padding:8px 0;display:flex;justify-content:space-between;align-items:center"><span>${t}</span><button class="btn btn-danger" onclick="removeSup(${i})">Eliminar</button></div>`).join('')}
+      <div style="display:flex;gap:8px;margin-top:10px"><input id="newSup" placeholder="Nombre nuevo supervisor" /><button class="btn btn-success" onclick="addSup()">+</button></div>
+    </div>
+    <div class="card">
+      <div class="sec-title">Datos</div>
+      <div class="btn-row">
+        <button class="btn btn-warning" onclick="exportAllCSV()">Exportar Todo a CSV</button>
+        <button class="btn btn-danger" onclick="resetAll()">Restablecer Configuración</button>
+        <button class="btn btn-danger" onclick="clearAllInspections()">Borrar Todas las Inspecciones</button>
+      </div>
+    </div>
+  `;
+}
+
+function setVal(section, id, val) { currentInspection[section][id] = val; render(); }
+
+function nextStep() {
+  if (currentStep === 0) {
+    const sId = document.getElementById('scaffoldId').value;
+    const tech = document.getElementById('technician').value;
+    if (!sId || !tech) { alert('Por favor ingrese el número de andamio y seleccione un técnico.'); return; }
+    currentInspection.scaffoldId = sId;
+    currentInspection.technician = tech;
+  }
+  if (currentStep === 5) return;
+  currentStep++;
+  render();
+  if (currentStep === 5) setTimeout(initSignatures, 100);
+}
+
+function prevStep() { if (currentStep > 0) { currentStep--; render(); } }
+function cancelInspection() { if (confirm('¿Cancelar esta inspección?')) { currentInspection = null; showView('home'); } }
+
+function saveInspectionFinal() {
+  const notes = document.getElementById('notes');
+  if (notes) currentInspection.notes = notes.value;
+  const sigT = document.getElementById('sigTech');
+  if (sigT) currentInspection.sigTech = sigT.toDataURL();
+  const sigS = document.getElementById('sigSup');
+  if (sigS) currentInspection.sigSup = sigS.toDataURL();
+  const sigM = document.getElementById('sigMgr');
+  if (sigM) currentInspection.sigMgr = sigM.toDataURL();
+  inspections.unshift(currentInspection);
+  saveInspections();
+  alert('Inspección guardada correctamente.');
+  currentInspection = null;
+  showView('history');
+}
+
+// Signature pad
+function initSignatures() {
+  ['sigTech','sigSup','sigMgr'].forEach(id => {
+    const c = document.getElementById(id);
+    if (!c) return;
+    c.width = c.offsetWidth; c.height = 150;
+    const ctx = c.getContext('2d');
+    ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.strokeStyle = '#000';
+    let drawing = false;
+    const start = e => { drawing = true; const p = getPos(e,c); ctx.beginPath(); ctx.moveTo(p.x,p.y); e.preventDefault(); };
+    const move = e => { if (!drawing) return; const p = getPos(e,c); ctx.lineTo(p.x,p.y); ctx.stroke(); e.preventDefault(); };
+    const end = e => { drawing = false; e.preventDefault(); };
+    c.addEventListener('mousedown',start); c.addEventListener('mousemove',move); c.addEventListener('mouseup',end); c.addEventListener('mouseleave',end);
+    c.addEventListener('touchstart',start); c.addEventListener('touchmove',move); c.addEventListener('touchend',end);
+  });
+}
+function getPos(e,c) {
+  const r = c.getBoundingClientRect();
+  const x = (e.touches?e.touches[0].clientX:e.clientX) - r.left;
+  const y = (e.touches?e.touches[0].clientY:e.clientY) - r.top;
+  return {x:x*(c.width/r.width), y:y*(c.height/r.height)};
+}
+function clearSig(id) { const c=document.getElementById(id); c.getContext('2d').clearRect(0,0,c.width,c.height); }
+
+function exportCSV() {
+  const i = currentInspection;
+  const rows = [['Campo','Valor']];
+  rows.push(['Andamio',i.scaffoldId]);
+  rows.push(['Fecha',new Date(i.date).toLocaleString('es-PA')]);
+  rows.push(['Técnico',i.technician]);
+  rows.push(['Estado',i.status]);
+  ['rigging','ccb','hoistA','hoistB'].forEach(s => {
+    const checks = s==='rigging'?config.checks.rigging:s==='ccb'?config.checks.ccb:config.checks.hoist;
+    checks.forEach(c => rows.push([`${s}: ${c.label}`, i[s][c.id]||'']));
+  });
+  rows.push(['Notas',i.notes||'']);
+  downloadCSV(rows,`inspeccion_${i.scaffoldId}_${Date.now()}.csv`);
+}
+
+function exportAllCSV() {
+  if (inspections.length === 0) { alert('No hay inspecciones.'); return; }
+  const rows = [['Andamio','Fecha','Técnico','Supervisor','Estado','Notas']];
+  inspections.forEach(i => rows.push([i.scaffoldId, new Date(i.date).toLocaleString('es-PA'), i.technician, i.supervisor||'', i.status, i.notes||'']));
+  downloadCSV(rows,`inspecciones_${Date.now()}.csv`);
+}
+
+function downloadCSV(rows,name) {
+  const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download = name; a.click();
+}
+
+function exportPDF() {
+  const i = currentInspection;
+  const w = window.open('','_blank');
+  const statusText = i.status==='green'?'APROBADO':i.status==='orange'?'REVISIÓN PENDIENTE':i.status==='red'?'NO APROBADO':'INCOMPLETO';
+  const statusColor = i.status==='green'?'#1e8a5a':i.status==='orange'?'#8a5a00':i.status==='red'?'#8a2a2a':'#5a80a0';
+  w.document.write(`
+    <html><head><title>Inspección ${i.scaffoldId}</title><style>
+    body{font-family:Arial;padding:40px;color:#000}
+    h1{color:#1e6090;border-bottom:2px solid #1e6090;padding-bottom:10px}
+    .status{padding:20px;text-align:center;background:${statusColor};color:#fff;font-size:24px;font-weight:700;margin:20px 0;border-radius:8px}
+    .info{margin:20px 0}.info td{padding:8px;border-bottom:1px solid #ccc}
+    .sig{margin-top:40px;border-top:1px solid #000;padding-top:10px;display:inline-block;width:45%;margin-right:20px}
+    img{max-width:200px;max-height:80px}
+    </style></head><body>
+    <h1>Canal de Panamá — Inspección Diaria de Andamio</h1>
+    <div class="status">${statusText}</div>
+    <table class="info">
+      <tr><td><strong>Número de Andamio:</strong></td><td>${i.scaffoldId}</td></tr>
+      <tr><td><strong>Fecha:</strong></td><td>${new Date(i.date).toLocaleString('es-PA')}</td></tr>
+      <tr><td><strong>Técnico:</strong></td><td>${i.technician}</td></tr>
+      ${i.supervisor?`<tr><td><strong>Supervisor:</strong></td><td>${i.supervisor}</td></tr>`:''}
+      ${i.manager?`<tr><td><strong>Manager:</strong></td><td>${i.manager}</td></tr>`:''}
+    </table>
+    <div style="margin-top:60px">
+      ${i.sigTech?`<div class="sig"><img src="${i.sigTech}"/><br>Firma Técnico: ${i.technician}</div>`:''}
+      ${i.sigSup?`<div class="sig"><img src="${i.sigSup}"/><br>Firma Supervisor: ${i.supervisor}</div>`:''}
+      ${i.sigMgr?`<div class="sig"><img src="${i.sigMgr}"/><br>Firma Manager: ${i.manager}</div>`:''}
+    </div>
+    <script>setTimeout(()=>window.print(),500)<\/script>
+    </body></html>`);
+}
+
+function addTech() { const v=document.getElementById('newTech').value; if(v){config.techs.push(v);saveConfig();render();} }
+function removeTech(i) { config.techs.splice(i,1);saveConfig();render(); }
+function addSup() { const v=document.getElementById('newSup').value; if(v){config.supervisors.push(v);saveConfig();render();} }
+function removeSup(i) { config.supervisors.splice(i,1);saveConfig();render(); }
+function resetAll() { if(confirm('¿Restablecer configuración?')){localStorage.removeItem('tirak_config');config=JSON.parse(JSON.stringify(DEFAULT_CONFIG));render();} }
+function clearAllInspections() { if(confirm('¿Borrar TODAS las inspecciones?')){inspections=[];saveInspections();render();} }
+
+function attachListeners() {}
+
+render();
+</script>
+</body>
+</html>
